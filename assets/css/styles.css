@@ -1,17 +1,22 @@
 body,
 html {
   overflow: hidden;
+  font-family: 'Bricolage Grotesque', sans-serif;
 }
 
 .hide-on-sm {
-  display: block; /* default display value */
+  display: block;
+  /* default display value */
 }
+
 .gold {
   color: #ffd700 !important;
 }
+
 .lime {
   color: lime !important;
 }
+
 .form-error {
   color: red;
   width: 100%;
@@ -21,6 +26,7 @@ html {
   border-radius: 1px;
   text-align: center;
 }
+
 .logo {
   color: white;
   font-size: 140%;
@@ -29,36 +35,46 @@ html {
   letter-spacing: 35px;
   left: 4px;
 }
+
 @media only screen and (max-width: 574px) {
   .hide-on-sm {
-    display: none; /* hide on small screens */
+    display: none;
+    /* hide on small screens */
   }
 }
+
 .hide-on-lg {
-  display: block; /* default display value */
+  display: block;
+  /* default display value */
 }
 
 @media only screen and (min-width: 575px) {
   .hide-on-lg {
-    display: none; /* hide on large screens */
+    display: none;
+    /* hide on large screens */
   }
 }
+
 .switchback {
   position: absolute;
   top: 25px;
   left: 50px;
 }
+
 .btn-primary:hover {
   background-color: white;
   color: black !important;
   border: 1px solid #a63493;
 }
-.switch > .row {
+
+.switch>.row {
   display: none;
 }
-.switch > .row.active {
+
+.switch>.row.active {
   display: block;
 }
+
 .css-selector {
   background: linear-gradient(131deg, #ffffff, #a63493, #000000);
   background-size: 600% 600%;
@@ -73,68 +89,85 @@ html {
   0% {
     background-position: 5% 0%;
   }
+
   50% {
     background-position: 96% 100%;
   }
+
   100% {
     background-position: 5% 0%;
   }
 }
+
 @-moz-keyframes coretech {
   0% {
     background-position: 5% 0%;
   }
+
   50% {
     background-position: 96% 100%;
   }
+
   100% {
     background-position: 5% 0%;
   }
 }
+
 @-o-keyframes coretech {
   0% {
     background-position: 5% 0%;
   }
+
   50% {
     background-position: 96% 100%;
   }
+
   100% {
     background-position: 5% 0%;
   }
 }
+
 @keyframes coretech {
   0% {
     background-position: 5% 0%;
   }
+
   50% {
     background-position: 96% 100%;
   }
+
   100% {
     background-position: 5% 0%;
   }
 }
+
 .login-logo {
   width: 100px;
   position: relative;
   color: #00ffff;
   padding-bottom: 30px;
 }
+
 .form-control:focus {
   color: #fff;
   border: #a63493 1px solid !important;
 }
+
 .p-input:focus {
   color: white !important;
 }
+
 .grid-center {
   display: grid;
   place-items: center;
 }
+
 .bottom-ever {
   position: relative;
   bottom: 0;
   width: 100%;
 }
+
 .three-body {
   --uib-size: 35px;
   --uib-speed: 0.8s;
@@ -212,6 +245,7 @@ html {
 }
 
 @keyframes wobble1 {
+
   0%,
   100% {
     transform: translateY(0%) scale(1);
@@ -225,6 +259,7 @@ html {
 }
 
 @keyframes wobble2 {
+
   0%,
   100% {
     transform: translateY(0%) scale(1);
@@ -236,9 +271,11 @@ html {
     opacity: 0.8;
   }
 }
+
 .hidden {
   display: none;
 }
+
 #preloader {
   background: black;
   position: fixed;
@@ -250,14 +287,17 @@ html {
   display: grid;
   place-items: center;
 }
+
 .sm {
   font-size: 10px;
   color: #939393;
 }
+
 .profit {
   color: lime;
   padding: 10px;
 }
+
 .f-fixed {
   padding-left: 1%;
   padding-right: 1%;
@@ -301,10 +341,11 @@ html {
 }
 
 @media only screen and (max-width: 992px) {
-  .modal.show > .modal-con {
+  .modal.show>.modal-con {
     width: 80vw;
   }
-  .modal.show > p {
+
+  .modal.show>p {
     position: absolute;
     right: 9vw;
     top: 8vh;
@@ -322,7 +363,7 @@ html {
   padding-bottom: 10px;
 }
 
-.card-row.two > img {
+.card-row.two>img {
   border: 1px solid #191c24;
   border-radius: 20px;
   padding: 3px;
@@ -334,7 +375,7 @@ html {
   object-fit: cover;
 }
 
-.card-row.four > img {
+.card-row.four>img {
   border: 1px solid #191c24;
   border-radius: 20px;
   padding: 3px;
@@ -375,7 +416,7 @@ html {
   place-items: center;
 }
 
-.main-div  img {
+.main-div img {
   width: 50%;
   aspect-ratio: 1/1;
   object-fit: cover;
@@ -385,7 +426,8 @@ html {
 }
 
 .popout-container {
-  display: none; /* Hide by default */
+  display: none;
+  /* Hide by default */
   position: fixed;
   top: 0;
   left: 0;
@@ -414,13 +456,11 @@ html {
   padding: 10px;
 }
 
-.product-info > h2
-{
+.product-info>h2 {
   font-size: 2.3rem;
 }
 
-.product-info select
-{
+.product-info select {
   position: relative;
   left: -4px;
   background: transparent;
@@ -429,7 +469,7 @@ html {
   padding: 0;
   margin: 0;
   color: #dedede;
-  border: 1px  solid  #a63493;
+  border: 1px solid #a63493;
   height: 3rem;
   width: 100%;
 }
@@ -444,8 +484,7 @@ html {
   position: relative;
 }
 
-.product-info button
-{
+.product-info button {
   height: 3rem;
 }
 
@@ -456,22 +495,20 @@ html {
   height: 100%;
 }
 
-.product-card
-{
+.product-card {
   border: 1px solid #444444;
   border-radius: 2px;
   margin-bottom: 15px;
 }
 
-#backButton
-{
+#backButton {
   position: absolute;
   top: 20;
   left: 20;
   z-index: 9;
 }
 
-tbody.form > tr > td > select {
+tbody.form>tr>td>select {
   position: relative;
   left: -4px;
   background: transparent;
@@ -482,41 +519,23 @@ tbody.form > tr > td > select {
   color: #dedede;
 }
 
-tbody.form > tr > td > select > option {
+tbody.form>tr>td>select>option {
   background-color: #191c24;
   color: #dedede;
   border: none;
 }
 
-tbody.form > tr > td > select > option:hover {
+tbody.form>tr>td>select>option:hover {
   background-color: #191c24;
   color: #dedede;
 }
 
-tbody.form > tr > td > p > input {
+tbody.form>tr>td>p>input {
   background: transparent;
   width: 8px;
   box-shadow: none;
   border: none;
-  padding: 0;
-  margin: 0;
-  color: #a63493;
-}
-
-.hide-arrow input[type='number']::-webkit-outer-spin-button,
-.hide-arrow input[type='number']::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-.hide-arrow input[type='number'] {
-  -moz-appearance: textfield;
-}
-
-
-
-::selection {
-  color:  white;
+  color: white;
   background: #a63493;
 }
 
