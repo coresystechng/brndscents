@@ -1,103 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>BRNDSCENTS</title>
-  <link rel="shortcut icon" href="assets/images/logos/favicon.png" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" 
-      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-  <link rel="stylesheet" href="assets/css/styles.css">
-</head>
-
-<body>
-  <div id="preloader">
-    <div id="loader">
-      <span class="load">
-        <div class="three-body">
-          <div class="three-body__dot"></div>
-          <div class="three-body__dot"></div>
-          <div class="three-body__dot"></div>
-        </div>
-      </span>
-    </div>
-  </div>
-  <div class="container-fluid vh-100 d-flex align-items-center justify-content-center bg-white">
-    <div class="row w-100">
-      <div class="col-lg-7 mx-auto text-white">
-        <div class="row align-items-center">
-          <div class="col-lg-7 text-center text-lg-end pe-lg-4 mb-4 mb-lg-0">
-            <img src="assets/images/gif/index.gif" class="img-fluid" alt="404 Image">
-          </div>
-          <div class="col-lg-5 text-lg-start text-center ps-lg-4">
-            <h2 class="fw-bold text-primary">GET READY!</h2>
-            <span class="fw-light text-dark">Our website would be launching in . . .</span><br>
-            <br>
-            <div class="text-center">
-              <h3 class="text-white bg-primary py-3 rounded-2" id="countdown" style="cursor: pointer;"></h3>
-            </div>
-          </div>
-        </div>
-        <footer class="mt-5">
-          <div class="w-100 text-center">
-            <span class="d-block text-secondary"><b>&copy; BRND SCENTS <span id="copyright-year"></span>.
-                Built by <u><a href="https://coresystech.ng" target="_blank"
-                    class="text-primary">CORE-TECH</a></u></b>.
-            </span>
-          </div>
-        </footer>
-      </div>
-    </div>
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-    crossorigin="anonymous"></script>
-  <script>
-    // Hide preloader when window is loaded
-    window.addEventListener('load', function () {
-      const preloader = document.getElementById('preloader');
-      if (preloader) {
-        preloader.style.display = 'none';
-      }
-    });
-
-    // Set the future date (YYYY, MM-1, DD, HH, MM, SS)
-    const futureDate = new Date(2025, 11, 31, 23, 59, 0);
-
-    // Get the countdown element
-    const countdownEl = document.getElementById("countdown");
-
-    // Check if the countdown element exists
-    if (countdownEl) {
-      // Update the countdown every second
-      setInterval(() => {
-        // Get the current date and time
-        const now = new Date();
-
-        // Calculate the time remaining
-        const timeRemaining = futureDate.getTime() - now.getTime();
-
-        // Calculate the number of days, hours, minutes, and seconds remaining
-        const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((timeRemaining / (1000 * 60 * 60)) % 24);
-        const minutes = Math.floor((timeRemaining / (1000 * 60)) % 60);
-        const seconds = Math.floor((timeRemaining / 1000) % 60);
-
-        // Set the text content of the countdown element
-        countdownEl.textContent = `${days} days, ${hours} hrs, ${minutes} mins, ${seconds} secs`;
-      }, 1000); // Update the countdown every second
-    } else {
-      console.error("Countdown element not found.");
-    }
-
-    // Update copyright year
-    const copyrightYearEl = document.getElementById("copyright-year");
-    if (copyrightYearEl) {
-      copyrightYearEl.textContent = new Date().getFullYear();
-    }
-
-  </script>
-</body>
-
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>brndscents</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
