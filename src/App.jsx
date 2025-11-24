@@ -10,7 +10,17 @@ import {
   Printer, 
   Trash2, 
   FileText,
-  Download
+  Download,
+  Lock,
+  TrendingUp,
+  TrendingDown,
+  AlertCircle,
+  CreditCard,
+  Activity,
+  ArrowUpRight,
+  ArrowDownRight,
+  Store,
+  MapPin
 } from 'lucide-react';
 
 // --- BRAND CONSTANTS ---
@@ -33,6 +43,82 @@ const INITIAL_PRODUCTS = [
   { id: 12, name: "Interesting She 50ml", price: 6000, cost: 5500, stock: 3, category: "Perfume", status: "Low Stock" },
   { id: 13, name: "Monogotas 100ml", price: 4000, cost: 3500, stock: 2, category: "Perfume", status: "Low Stock" },
   { id: 14, name: "Bre Tres 100ml", price: 4000, cost: 3500, stock: 2, category: "Perfume", status: "Low Stock" },
+];
+
+const DASHBOARD_DATA = {
+  totalSales: 2500000,
+  totalPurchases: 1200000,
+  expenses: 450000,
+  netProfit: 850000,
+  retailerSales: [
+    { name: "Beauty Plus", sales: 450000, growth: 12 },
+    { name: "Scent World", sales: 320000, growth: -5 },
+    { name: "Luxe Fragrances", sales: 280000, growth: 8 },
+    { name: "Essence Store", sales: 150000, growth: 24 },
+  ],
+  recentExpenses: [
+    { id: 1, desc: "Packaging Materials", amount: 150000, date: "2023-11-20", category: "Operations" },
+    { id: 2, desc: "Logistics / Delivery", amount: 45000, date: "2023-11-22", category: "Shipping" },
+    { id: 3, desc: "Marketing Ads", amount: 120000, date: "2023-11-23", category: "Marketing" },
+    { id: 4, desc: "Store Utilities", amount: 35000, date: "2023-11-24", category: "Utilities" },
+  ],
+  topCustomers: [
+    { id: 1, name: "Sarah Jenkins", totalSpent: 125000, orders: 5, lastActive: "2 days ago" },
+    { id: 2, name: "Michael Chen", totalSpent: 98000, orders: 3, lastActive: "1 week ago" },
+    { id: 3, name: "Amara Okafor", totalSpent: 85000, orders: 4, lastActive: "3 days ago" },
+    { id: 4, name: "David Smith", totalSpent: 72000, orders: 2, lastActive: "Yesterday" },
+  ]
+};
+
+const RETAILERS_DATA = [
+  { 
+    id: 1, 
+    firstName: "Chioma", 
+    surname: "Okeke", 
+    otherNames: "Grace",
+    code: "RET-001", 
+    location: "Lekki Phase 1", 
+    state: "Lagos", 
+    phone: "+234 801 234 5678", 
+    email: "chioma.okeke@beautyplus.com", 
+    totalOrders: 45, 
+    totalSales: 450000, 
+    totalProfit: 120000, 
+    performance: "Excellent",
+    photo: "https://ui-avatars.com/api/?name=Chioma+Okeke&background=a63493&color=fff"
+  },
+  { 
+    id: 2, 
+    firstName: "Emmanuel", 
+    surname: "Adeyemi", 
+    otherNames: "",
+    code: "RET-002", 
+    location: "Wuse Zone 2", 
+    state: "Abuja", 
+    phone: "+234 802 987 6543", 
+    email: "emmanuel.a@scentworld.com", 
+    totalOrders: 28, 
+    totalSales: 320000, 
+    totalProfit: 85000, 
+    performance: "Average",
+    photo: "https://ui-avatars.com/api/?name=Emmanuel+Adeyemi&background=3c763d&color=fff"
+  },
+  { 
+    id: 3, 
+    firstName: "Aisha", 
+    surname: "Bello", 
+    otherNames: "Zainab",
+    code: "RET-003", 
+    location: "Kano City", 
+    state: "Kano", 
+    phone: "+234 803 555 1212", 
+    email: "aisha.b@luxestore.com", 
+    totalOrders: 12, 
+    totalSales: 150000, 
+    totalProfit: 40000, 
+    performance: "Good",
+    photo: "https://ui-avatars.com/api/?name=Aisha+Bello&background=f0ad4e&color=fff"
+  },
 ];
 
 // --- UTILS ---
@@ -424,6 +510,146 @@ const POSSystem = ({ products }) => {
   );
 };
 
+// --- NEW FEATURE: RETAILERS MANAGEMENT ---
+const RetailersManager = () => {
+  const [selectedRetailer, setSelectedRetailer] = useState(RETAILERS_DATA[0]);
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredRetailers = RETAILERS_DATA.filter(r => 
+    r.firstName.toLowerCase().includes(searchTerm.toLowerCase()) || 
+    r.surname.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    r.code.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  return (
+    <div className="row g-4 h-100">
+      {/* List Column */}
+      <div className="col-lg-4 d-flex flex-column">
+        <div className="card border-0 shadow-sm h-100">
+          <div className="card-header bg-white py-3">
+            <h6 className="mb-3 font-weight-bold d-flex align-items-center">
+              <Store className="text-brand me-2" size={20} /> Retailers Directory
+            </h6>
+            <input 
+              type="text" 
+              className="form-control bg-light border-0" 
+              placeholder="Search name or code..." 
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
+          </div>
+          <div className="list-group list-group-flush overflow-auto flex-grow-1">
+            {filteredRetailers.map(retailer => (
+              <button 
+                key={retailer.id}
+                onClick={() => setSelectedRetailer(retailer)}
+                className={`list-group-item list-group-item-action py-3 px-4 border-bottom ${selectedRetailer?.id === retailer.id ? 'bg-brand-light border-start border-4 border-brand' : ''}`}
+                style={selectedRetailer?.id === retailer.id ? {backgroundColor: '#f3e5f5', borderColor: '#a63493'} : {}}
+              >
+                <div className="d-flex align-items-center">
+                  <img src={retailer.photo} alt={retailer.firstName} className="rounded-circle me-3" width="40" height="40" />
+                  <div>
+                    <div className="fw-bold text-dark">{retailer.firstName} {retailer.surname}</div>
+                    <div className="small text-muted">{retailer.code} • {retailer.state}</div>
+                  </div>
+                </div>
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Detail Column */}
+      <div className="col-lg-8">
+        {selectedRetailer ? (
+          <div className="card border-0 shadow-sm h-100">
+            <div className="card-body p-5">
+              {/* Header Profile */}
+              <div className="d-flex align-items-start justify-content-between mb-5">
+                <div className="d-flex align-items-center">
+                  <img 
+                    src={selectedRetailer.photo} 
+                    alt={selectedRetailer.firstName} 
+                    className="rounded-circle shadow-sm me-4" 
+                    width="100" 
+                    height="100" 
+                  />
+                  <div>
+                    <h2 className="fw-bold text-brand mb-1">{selectedRetailer.firstName} {selectedRetailer.surname}</h2>
+                    <p className="text-muted mb-2">{selectedRetailer.otherNames}</p>
+                    <div className="d-flex gap-2">
+                      <span className="badge bg-dark text-white px-3 py-2 rounded-pill">{selectedRetailer.code}</span>
+                      <span className={`badge px-3 py-2 rounded-pill ${
+                        selectedRetailer.performance === 'Excellent' ? 'bg-success' : 
+                        selectedRetailer.performance === 'Good' ? 'bg-primary' : 'bg-warning text-dark'
+                      }`}>
+                        {selectedRetailer.performance} Performance
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <button className="btn btn-outline-secondary btn-sm">Edit Profile</button>
+              </div>
+
+              {/* Stats Grid */}
+              <div className="row g-4 mb-5">
+                <div className="col-md-4">
+                  <div className="p-3 bg-light rounded text-center border">
+                    <div className="text-muted small text-uppercase fw-bold mb-1">Total Orders</div>
+                    <div className="h3 fw-bold text-dark mb-0">{selectedRetailer.totalOrders}</div>
+                  </div>
+                </div>
+                <div className="col-md-4">
+                  <div className="p-3 bg-light rounded text-center border">
+                    <div className="text-muted small text-uppercase fw-bold mb-1">Total Sales</div>
+                    <div className="h3 fw-bold text-brand mb-0">{formatCurrency(selectedRetailer.totalSales)}</div>
+                  </div>
+                </div>
+                <div className="col-md-4">
+                  <div className="p-3 bg-light rounded text-center border">
+                    <div className="text-muted small text-uppercase fw-bold mb-1">Total Profit</div>
+                    <div className="h3 fw-bold text-success mb-0">{formatCurrency(selectedRetailer.totalProfit)}</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Contact Info */}
+              <h5 className="fw-bold border-bottom pb-2 mb-4">Contact Information</h5>
+              <div className="row g-4">
+                <div className="col-md-6">
+                  <label className="small text-muted text-uppercase fw-bold">Location</label>
+                  <div className="d-flex align-items-center mt-1">
+                    <MapPin size={18} className="text-brand me-2" />
+                    <span className="fw-medium">{selectedRetailer.location}</span>
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <label className="small text-muted text-uppercase fw-bold">State</label>
+                  <div className="fw-medium mt-1">{selectedRetailer.state}</div>
+                </div>
+                <div className="col-md-6">
+                  <label className="small text-muted text-uppercase fw-bold">Telephone</label>
+                  <div className="fw-medium mt-1">{selectedRetailer.phone}</div>
+                </div>
+                <div className="col-md-6">
+                  <label className="small text-muted text-uppercase fw-bold">Email Address</label>
+                  <div className="fw-medium mt-1 text-brand">{selectedRetailer.email}</div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        ) : (
+          <div className="h-100 d-flex flex-column align-items-center justify-content-center text-muted bg-white rounded border shadow-sm">
+            <Store size={64} className="mb-3 opacity-25" />
+            <p>Select a retailer to view details</p>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
 // --- MAIN ADMIN DASHBOARD ---
 const AdminDashboard = ({ onSwitch }) => {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -441,6 +667,8 @@ const AdminDashboard = ({ onSwitch }) => {
 
   const renderContent = () => {
     switch(activeTab) {
+      case 'retailers':
+        return <RetailersManager />;
       case 'pos':
         return <POSSystem products={products} />;
       case 'inventory':
@@ -494,10 +722,205 @@ const AdminDashboard = ({ onSwitch }) => {
         );
       case 'dashboard':
       default:
+        const lowStockItems = products.filter(p => p.stock <= 5);
+        const totalInventoryValue = products.reduce((acc, p) => acc + (p.cost * p.stock), 0);
+        const totalRetailValue = products.reduce((acc, p) => acc + (p.price * p.stock), 0);
+
         return (
-          <div className="text-center py-5 my-5">
-            <h2 className="text-muted mb-3">Overview Dashboard</h2>
-            <p className="text-muted">Select "Sales & POS" or "Inventory" from the sidebar to use the new tools.</p>
+          <div className="container-fluid p-0">
+            {/* Top Stats Cards */}
+            <div className="row g-4 mb-4">
+              <div className="col-md-3">
+                <div className="card border-0 shadow-sm h-100">
+                  <div className="card-body">
+                    <div className="d-flex justify-content-between align-items-start mb-2">
+                      <div className="text-muted small text-uppercase font-weight-bold">Total Sales</div>
+                      <div className="bg-light rounded p-1 text-brand"><TrendingUp size={18} /></div>
+                    </div>
+                    <h3 className="font-weight-bold mb-1">{formatCurrency(DASHBOARD_DATA.totalSales)}</h3>
+                    <div className="small text-success d-flex align-items-center">
+                      <ArrowUpRight size={14} className="me-1" /> 12.5% <span className="text-muted ms-1">vs last month</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-3">
+                <div className="card border-0 shadow-sm h-100">
+                  <div className="card-body">
+                    <div className="d-flex justify-content-between align-items-start mb-2">
+                      <div className="text-muted small text-uppercase font-weight-bold">Purchases</div>
+                      <div className="bg-light rounded p-1 text-primary"><ShoppingBag size={18} /></div>
+                    </div>
+                    <h3 className="font-weight-bold mb-1">{formatCurrency(DASHBOARD_DATA.totalPurchases)}</h3>
+                    <div className="small text-danger d-flex align-items-center">
+                      <ArrowUpRight size={14} className="me-1" /> 8.2% <span className="text-muted ms-1">vs last month</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-3">
+                <div className="card border-0 shadow-sm h-100">
+                  <div className="card-body">
+                    <div className="d-flex justify-content-between align-items-start mb-2">
+                      <div className="text-muted small text-uppercase font-weight-bold">Expenses</div>
+                      <div className="bg-light rounded p-1 text-danger"><CreditCard size={18} /></div>
+                    </div>
+                    <h3 className="font-weight-bold mb-1">{formatCurrency(DASHBOARD_DATA.expenses)}</h3>
+                    <div className="small text-success d-flex align-items-center">
+                      <ArrowDownRight size={14} className="me-1" /> 2.4% <span className="text-muted ms-1">vs last month</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-3">
+                <div className="card border-0 shadow-sm h-100">
+                  <div className="card-body">
+                    <div className="d-flex justify-content-between align-items-start mb-2">
+                      <div className="text-muted small text-uppercase font-weight-bold">Net Profit</div>
+                      <div className="bg-light rounded p-1 text-success"><Activity size={18} /></div>
+                    </div>
+                    <h3 className="font-weight-bold mb-1 text-success">{formatCurrency(DASHBOARD_DATA.netProfit)}</h3>
+                    <div className="small text-success d-flex align-items-center">
+                      <ArrowUpRight size={14} className="me-1" /> 18.2% <span className="text-muted ms-1">vs last month</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Middle Row: Retailers & Inventory */}
+            <div className="row g-4 mb-4">
+              <div className="col-lg-8">
+                <div className="card border-0 shadow-sm h-100">
+                  <div className="card-header bg-white py-3">
+                    <h6 className="mb-0 font-weight-bold">Retailer Performance</h6>
+                  </div>
+                  <div className="table-responsive">
+                    <table className="table table-hover mb-0 align-middle">
+                      <thead className="bg-light text-muted text-uppercase small">
+                        <tr>
+                          <th className="px-4 py-3">Retailer Name</th>
+                          <th className="px-4 py-3 text-end">Total Sales</th>
+                          <th className="px-4 py-3 text-end">Growth</th>
+                          <th className="px-4 py-3 text-end">Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {DASHBOARD_DATA.retailerSales.map((r, idx) => (
+                          <tr key={idx}>
+                            <td className="px-4 fw-medium">{r.name}</td>
+                            <td className="px-4 text-end">{formatCurrency(r.sales)}</td>
+                            <td className={`px-4 text-end ${r.growth >= 0 ? 'text-success' : 'text-danger'}`}>
+                              {r.growth > 0 ? '+' : ''}{r.growth}%
+                            </td>
+                            <td className="px-4 text-end">
+                              <span className="badge bg-light text-success border border-success rounded-pill">Active</span>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div className="col-lg-4">
+                <div className="card border-0 shadow-sm h-100">
+                  <div className="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+                    <h6 className="mb-0 font-weight-bold">Inventory Health</h6>
+                    <span className="badge bg-danger rounded-pill">{lowStockItems.length} Alerts</span>
+                  </div>
+                  <div className="card-body p-0">
+                    <div className="p-3 border-bottom bg-light">
+                      <div className="d-flex justify-content-between small mb-1">
+                        <span className="text-muted">Total Inventory Value (Cost)</span>
+                        <span className="fw-bold">{formatCurrency(totalInventoryValue)}</span>
+                      </div>
+                      <div className="d-flex justify-content-between small">
+                        <span className="text-muted">Potential Revenue</span>
+                        <span className="fw-bold text-success">{formatCurrency(totalRetailValue)}</span>
+                      </div>
+                    </div>
+                    <ul className="list-group list-group-flush">
+                      {lowStockItems.slice(0, 5).map(p => (
+                        <li key={p.id} className="list-group-item d-flex justify-content-between align-items-center px-4 py-3">
+                          <div>
+                            <div className="fw-medium small">{p.name}</div>
+                            <div className="text-muted" style={{fontSize: '0.75rem'}}>Stock: {p.stock} left</div>
+                          </div>
+                          <button className="btn btn-sm btn-outline-danger py-0 px-2" style={{fontSize: '0.75rem'}}>Restock</button>
+                        </li>
+                      ))}
+                    </ul>
+                    {lowStockItems.length > 5 && (
+                      <div className="p-2 text-center border-top">
+                        <a href="#" className="small text-decoration-none text-brand fw-bold" onClick={() => setActiveTab('inventory')}>View All Alerts</a>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Bottom Row: Expenses & Customers */}
+            <div className="row g-4">
+              <div className="col-lg-6">
+                <div className="card border-0 shadow-sm h-100">
+                  <div className="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+                    <h6 className="mb-0 font-weight-bold">Recent Expenses</h6>
+                    <button className="btn btn-sm btn-light text-muted"><Download size={16} /></button>
+                  </div>
+                  <div className="table-responsive">
+                    <table className="table table-sm mb-0 align-middle">
+                      <thead className="text-muted text-uppercase small">
+                        <tr>
+                          <th className="px-4 py-2">Description</th>
+                          <th className="px-4 py-2">Category</th>
+                          <th className="px-4 py-2 text-end">Amount</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {DASHBOARD_DATA.recentExpenses.map((e) => (
+                          <tr key={e.id}>
+                            <td className="px-4 py-3">
+                              <div className="fw-medium">{e.desc}</div>
+                              <div className="text-muted small">{e.date}</div>
+                            </td>
+                            <td className="px-4 py-3"><span className="badge bg-light text-secondary border">{e.category}</span></td>
+                            <td className="px-4 py-3 text-end fw-bold text-dark">{formatCurrency(e.amount)}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div className="col-lg-6">
+                <div className="card border-0 shadow-sm h-100">
+                  <div className="card-header bg-white py-3">
+                    <h6 className="mb-0 font-weight-bold">Top Customers</h6>
+                  </div>
+                  <div className="list-group list-group-flush">
+                    {DASHBOARD_DATA.topCustomers.map((c) => (
+                      <div key={c.id} className="list-group-item px-4 py-3 d-flex justify-content-between align-items-center">
+                        <div className="d-flex align-items-center">
+                          <div className="bg-light rounded-circle d-flex align-items-center justify-content-center me-3 text-brand fw-bold" style={{width: '40px', height: '40px'}}>
+                            {c.name.charAt(0)}
+                          </div>
+                          <div>
+                            <div className="fw-bold text-dark">{c.name}</div>
+                            <div className="small text-muted">{c.orders} Orders • Last active {c.lastActive}</div>
+                          </div>
+                        </div>
+                        <div className="text-end">
+                          <div className="fw-bold text-success">{formatCurrency(c.totalSpent)}</div>
+                          <div className="small text-muted">Lifetime Value</div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         );
     }
@@ -521,6 +944,9 @@ const AdminDashboard = ({ onSwitch }) => {
           </li>
           <li>
             <SidebarItem icon={Package} label="Inventory / Stock" active={activeTab === 'inventory'} onClick={() => setActiveTab('inventory')} />
+          </li>
+          <li>
+            <SidebarItem icon={Store} label="Retailers" active={activeTab === 'retailers'} onClick={() => setActiveTab('retailers')} />
           </li>
           <li>
             <SidebarItem icon={Users} label="Customers" active={activeTab === 'customers'} onClick={() => setActiveTab('customers')} />
@@ -557,17 +983,141 @@ const AdminDashboard = ({ onSwitch }) => {
   );
 };
 
-// 3. MAIN APP CONTROLLER
-const App = () => {
-  const [view, setView] = useState('public');
+// 3. LOGIN COMPONENT
+const Login = ({ onLogin, onCancel }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  if (view === 'admin') {
-    return <AdminDashboard onSwitch={() => setView('public')} />;
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setError('');
+    setLoading(true);
+
+    // Simulate network delay
+    setTimeout(() => {
+      // Mock authentication - Hardcoded for demo
+      if (email === 'admin@brndscents.com' && password === 'admin123') {
+        onLogin();
+      } else {
+        setError('Invalid email or password. Try admin@brndscents.com / admin123');
+        setLoading(false);
+      }
+    }, 800);
+  };
+
+  return (
+    <div className="min-vh-100 d-flex align-items-center justify-content-center bg-light position-relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="position-absolute top-0 start-0 w-100 h-100" style={{zIndex: 0}}>
+        <div className="position-absolute top-0 end-0 bg-brand opacity-10 rounded-circle" style={{width: '400px', height: '400px', transform: 'translate(30%, -30%)'}}></div>
+        <div className="position-absolute bottom-0 start-0 bg-brand-secondary opacity-10 rounded-circle" style={{width: '300px', height: '300px', transform: 'translate(-30%, 30%)'}}></div>
+      </div>
+
+      <div className="card border-0 shadow-lg" style={{maxWidth: '400px', width: '100%', zIndex: 1}}>
+        <div className="card-body p-5">
+          <div className="text-center mb-4">
+            <div className="bg-brand text-white d-inline-flex align-items-center justify-content-center rounded-circle mb-3 shadow-sm" style={{width: '64px', height: '64px'}}>
+              <Lock size={32} />
+            </div>
+            <h3 className="font-serif font-weight-bold text-dark">Admin Access</h3>
+            <p className="text-muted small">Please sign in to continue</p>
+          </div>
+
+          {error && (
+            <div className="alert alert-danger small py-2 d-flex align-items-center" role="alert">
+              <div className="me-2"><Trash2 size={14} /></div> {/* Using Trash2 as generic alert icon placeholder if AlertCircle not avail, but AlertCircle is imported in lucide-react usually. Wait, I didn't import AlertCircle in the last step explicitly but it might be there. I'll use Lock or just text if unsure. Actually AlertCircle was in the original file imports? Let me check. No, I see ShoppingBag... Download. I didn't see AlertCircle in the list I just edited. I'll use generic text or just no icon to be safe, or use Lock. */}
+              <div>{error}</div>
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+              <label className="form-label small text-muted text-uppercase font-weight-bold">Email Address</label>
+              <input 
+                type="email" 
+                className="form-control form-control-lg bg-light border-0" 
+                placeholder="name@company.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label className="form-label small text-muted text-uppercase font-weight-bold d-flex justify-content-between">
+                Password
+                <a href="#" className="text-decoration-none text-brand small">Forgot?</a>
+              </label>
+              <input 
+                type="password" 
+                className="form-control form-control-lg bg-light border-0" 
+                placeholder="••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+            
+            <button 
+              type="submit" 
+              className="btn btn-brand w-100 py-3 font-weight-bold text-uppercase shadow-sm mb-3"
+              disabled={loading}
+            >
+              {loading ? 'Signing in...' : 'Sign In Dashboard'}
+            </button>
+            
+            <button 
+              type="button"
+              onClick={onCancel}
+              className="btn btn-light w-100 py-3 font-weight-bold text-uppercase text-muted"
+            >
+              Return to Store
+            </button>
+          </form>
+        </div>
+        <div className="card-footer bg-light py-3 text-center border-0">
+          <small className="text-muted">Protected System • BRNDSCENTS</small>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// 4. MAIN APP CONTROLLER
+const App = () => {
+  const [view, setView] = useState('public'); // 'public', 'login', 'admin'
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const handleAdminAccess = () => {
+    if (isAuthenticated) {
+      setView('admin');
+    } else {
+      setView('login');
+    }
+  };
+
+  const handleLoginSuccess = () => {
+    setIsAuthenticated(true);
+    setView('admin');
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    setView('public');
+  };
+
+  if (view === 'admin' && isAuthenticated) {
+    return <AdminDashboard onSwitch={handleLogout} />;
+  }
+
+  if (view === 'login') {
+    return <Login onLogin={handleLoginSuccess} onCancel={() => setView('public')} />;
   }
 
   return (
     <div className="font-sans text-dark bg-white min-vh-100 d-flex flex-column">
-      <PublicNavbar onSwitch={() => setView('admin')} />
+      <PublicNavbar onSwitch={handleAdminAccess} />
       <HeroSection />
       {/* Product Grid Mockup */}
       <div className="container py-5">
