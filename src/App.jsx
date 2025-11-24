@@ -63,11 +63,11 @@ const DASHBOARD_DATA = {
     { id: 3, desc: "Marketing Ads", amount: 120000, date: "2023-11-23", category: "Marketing" },
     { id: 4, desc: "Store Utilities", amount: 35000, date: "2023-11-24", category: "Utilities" },
   ],
-  topCustomers: [
-    { id: 1, name: "Sarah Jenkins", totalSpent: 125000, orders: 5, lastActive: "2 days ago" },
-    { id: 2, name: "Michael Chen", totalSpent: 98000, orders: 3, lastActive: "1 week ago" },
-    { id: 3, name: "Amara Okafor", totalSpent: 85000, orders: 4, lastActive: "3 days ago" },
-    { id: 4, name: "David Smith", totalSpent: 72000, orders: 2, lastActive: "Yesterday" },
+  topVendors: [
+    { id: 1, name: "Fragrance Suppliers Ltd", totalSpent: 850000, orders: 12, lastActive: "2 days ago" },
+    { id: 2, name: "PackPro Nigeria", totalSpent: 245000, orders: 8, lastActive: "1 week ago" },
+    { id: 3, name: "Swift Logistics", totalSpent: 120000, orders: 15, lastActive: "3 days ago" },
+    { id: 4, name: "Digital Ads Agency", totalSpent: 120000, orders: 4, lastActive: "Yesterday" },
   ]
 };
 
@@ -695,6 +695,118 @@ const ExpenditureManager = () => {
     return tagObj ? tagObj.color : "secondary";
   };
 
+// --- NEW FEATURE: VENDORS MANAGEMENT ---
+const VendorsManager = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+  
+  // Empty vendors list for now
+  const VENDORS_DATA = [];
+
+  const filteredVendors = VENDORS_DATA.filter(vendor => 
+    vendor.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    vendor.category.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  return (
+    <div className="container-fluid p-0">
+      {/* Header Section */}
+      <div className="card border-0 shadow-sm mb-4">
+        <div className="card-body p-4">
+          <div className="row align-items-center">
+            <div className="col-md-8">
+              <h5 className="card-title mb-3 d-flex align-items-center text-dark font-weight-bold">
+                <Truck className="text-brand me-2" size={24} /> Vendor Management
+              </h5>
+              <p className="text-muted mb-0">Manage your suppliers and vendors</p>
+            </div>
+            <div className="col-md-4 text-end">
+              <button className="btn btn-brand font-weight-bold">
+                <Users size={18} className="me-2" />
+                Add New Vendor
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Search Section */}
+      <div className="card border-0 shadow-sm mb-4">
+        <div className="card-body p-4">
+          <div className="row g-3">
+            <div className="col-md-12">
+              <label className="form-label small text-muted text-uppercase font-weight-bold">Search Vendors</label>
+              <input 
+                type="text" 
+                className="form-control bg-light border-0" 
+                placeholder="Search by name or category..." 
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Vendors List / Empty State */}
+      <div className="card border-0 shadow-sm">
+        <div className="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+          <h6 className="mb-0 font-weight-bold">Vendors Directory ({filteredVendors.length})</h6>
+          <div className="btn-group">
+            <button className="btn btn-link text-secondary"><Download size={20} /></button>
+            <button className="btn btn-link text-secondary"><Printer size={20} /></button>
+          </div>
+        </div>
+        <div className="card-body">
+          {filteredVendors.length === 0 ? (
+            <div className="text-center py-5">
+              <div className="mb-4">
+                <Truck size={64} className="text-muted opacity-25" />
+              </div>
+              <h5 className="text-dark mb-2">No Vendors Yet</h5>
+              <p className="text-muted mb-4">Start by adding your first vendor to track suppliers and manage relationships.</p>
+              <button className="btn btn-brand font-weight-bold px-4">
+                <Users size={18} className="me-2" />
+                Add Your First Vendor
+              </button>
+            </div>
+          ) : (
+            <div className="table-responsive">
+              <table className="table table-hover mb-0 align-middle">
+                <thead className="bg-light text-muted text-uppercase small">
+                  <tr>
+                    <th className="px-4 py-3">Vendor Name</th>
+                    <th className="px-4 py-3">Category</th>
+                    <th className="px-4 py-3">Contact</th>
+                    <th className="px-4 py-3 text-end">Total Orders</th>
+                    <th className="px-4 py-3 text-end">Total Spent</th>
+                    <th className="px-4 py-3">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredVendors.map(vendor => (
+                    <tr key={vendor.id}>
+                      <td className="px-4 fw-medium">{vendor.name}</td>
+                      <td className="px-4 text-muted">{vendor.category}</td>
+                      <td className="px-4 text-muted small">{vendor.contact}</td>
+                      <td className="px-4 text-end">{vendor.totalOrders}</td>
+                      <td className="px-4 text-end fw-bold">{formatCurrency(vendor.totalSpent)}</td>
+                      <td className="px-4">
+                        <button className="btn btn-sm btn-outline-secondary">View</button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+
+
   return (
     <div className="container-fluid p-0">
       {/* Header Section */}
@@ -823,6 +935,8 @@ const AdminDashboard = ({ onSwitch }) => {
         return <RetailersManager />;
       case 'expenditure':
         return <ExpenditureManager />;
+      case 'suppliers':
+        return <VendorsManager />;
       case 'pos':
         return <POSSystem products={products} />;
       case 'inventory':
@@ -1015,7 +1129,7 @@ const AdminDashboard = ({ onSwitch }) => {
               </div>
             </div>
 
-            {/* Bottom Row: Expenses & Customers */}
+            {/* Bottom Row: Expenses & Vendors */}
             <div className="row g-4">
               <div className="col-lg-6">
                 <div className="card border-0 shadow-sm h-100">
@@ -1051,23 +1165,23 @@ const AdminDashboard = ({ onSwitch }) => {
               <div className="col-lg-6">
                 <div className="card border-0 shadow-sm h-100">
                   <div className="card-header bg-white py-3">
-                    <h6 className="mb-0 font-weight-bold">Top Customers</h6>
+                    <h6 className="mb-0 font-weight-bold">Top Vendors</h6>
                   </div>
                   <div className="list-group list-group-flush">
-                    {DASHBOARD_DATA.topCustomers.map((c) => (
-                      <div key={c.id} className="list-group-item px-4 py-3 d-flex justify-content-between align-items-center">
+                    {DASHBOARD_DATA.topVendors.map((v) => (
+                      <div key={v.id} className="list-group-item px-4 py-3 d-flex justify-content-between align-items-center">
                         <div className="d-flex align-items-center">
                           <div className="bg-light rounded-circle d-flex align-items-center justify-content-center me-3 text-brand fw-bold" style={{width: '40px', height: '40px'}}>
-                            {c.name.charAt(0)}
+                            {v.name.charAt(0)}
                           </div>
                           <div>
-                            <div className="fw-bold text-dark">{c.name}</div>
-                            <div className="small text-muted">{c.orders} Orders • Last active {c.lastActive}</div>
+                            <div className="fw-bold text-dark">{v.name}</div>
+                            <div className="small text-muted">{v.orders} Orders • Last active {v.lastActive}</div>
                           </div>
                         </div>
                         <div className="text-end">
-                          <div className="fw-bold text-success">{formatCurrency(c.totalSpent)}</div>
-                          <div className="small text-muted">Lifetime Value</div>
+                          <div className="fw-bold text-success">{formatCurrency(v.totalSpent)}</div>
+                          <div className="small text-muted">Total Spent</div>
                         </div>
                       </div>
                     ))}
