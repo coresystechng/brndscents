@@ -94,3 +94,26 @@ a:hover, a:focus, footer i:hover, footer i:focus {
 .featured-card:hover .card-title {
   color: var(--brand-primary);
 }
+
+/* Hero section responsive heights */
+.hero-section {
+  height: 750px;
+}
+
+@media (max-width: 992px) {
+  .hero-section {
+    height: 600px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    height: 490px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section {
+    height: 420px;
+  }
+}

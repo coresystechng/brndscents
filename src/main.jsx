@@ -8,6 +8,7 @@ import 'aos/dist/aos.css';
 
 // Initialize AOS (Animate On Scroll)
 AOS.init({ once: true, duration: 700 });
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
