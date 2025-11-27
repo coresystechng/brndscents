@@ -16,7 +16,7 @@ import {
   TrendingDown,
   AlertCircle,
   CreditCard,
-  Activity,
+    Activity,
   ArrowUpRight,
   ArrowDownRight,
   Store,
@@ -24,118 +24,9 @@ import {
   Wallet
 } from 'lucide-react';
 
-// --- BRAND CONSTANTS ---
-// Primary: #a63493 (Purple) -> .text-brand, .bg-brand, .btn-brand
-// Secondary: #3c763d (Green) -> .text-brand-secondary, .bg-brand-secondary
+import { INITIAL_PRODUCTS, DASHBOARD_DATA, RETAILERS_DATA, EXPENDITURE_DATA } from './data/mockData';
+import heroBg from './assets/hero-bg.jpg';
 
-// --- IMPORTED DATA FROM CSV ---
-const INITIAL_PRODUCTS = [
-  { id: 1, name: "Touch 5ml", price: 1500, cost: 1300, stock: 78, category: "Mini", status: "In Stock" },
-  { id: 2, name: "Atomisers 5ml", price: 1500, cost: 1300, stock: 12, category: "Accessory", status: "Low Stock" },
-  { id: 3, name: "FA Oil Perfume 10ml", price: 2000, cost: 1750, stock: 30, category: "Oil", status: "In Stock" },
-  { id: 4, name: "Naseem 24ml", price: 4500, cost: 4200, stock: 11, category: "Perfume", status: "Low Stock" },
-  { id: 5, name: "FA Oil Perfume 24ml", price: 4500, cost: 4200, stock: 5, category: "Oil", status: "Low Stock" },
-  { id: 6, name: "Mosuf 30ml", price: 4000, cost: 3700, stock: 12, category: "Perfume", status: "Low Stock" },
-  { id: 7, name: "Pendora Scents 30ml", price: 4500, cost: 4000, stock: 1, category: "Perfume", status: "Low Stock" },
-  { id: 8, name: "Novaa Suger 30ml", price: 5500, cost: 5000, stock: 15, category: "Perfume", status: "In Stock" },
-  { id: 9, name: "Official Crystal 35ml", price: 5000, cost: 4500, stock: 17, category: "Perfume", status: "In Stock" },
-  { id: 10, name: "Air Magic Air Freshener 42g", price: 3500, cost: 3000, stock: 5, category: "Home", status: "Low Stock" },
-  { id: 11, name: "Choco Musk 50ml", price: 6000, cost: 5500, stock: 2, category: "Gourmand", status: "Low Stock" },
-  { id: 12, name: "Interesting She 50ml", price: 6000, cost: 5500, stock: 3, category: "Perfume", status: "Low Stock" },
-  { id: 13, name: "Monogotas 100ml", price: 4000, cost: 3500, stock: 2, category: "Perfume", status: "Low Stock" },
-  { id: 14, name: "Bre Tres 100ml", price: 4000, cost: 3500, stock: 2, category: "Perfume", status: "Low Stock" },
-];
-
-const DASHBOARD_DATA = {
-  totalSales: 2500000,
-  totalPurchases: 1200000,
-  expenses: 450000,
-  netProfit: 850000,
-  retailerSales: [
-    { name: "Beauty Plus", sales: 450000, growth: 12 },
-    { name: "Scent World", sales: 320000, growth: -5 },
-    { name: "Luxe Fragrances", sales: 280000, growth: 8 },
-    { name: "Essence Store", sales: 150000, growth: 24 },
-  ],
-  recentExpenses: [
-    { id: 1, desc: "Packaging Materials", amount: 150000, date: "2023-11-20", category: "Operations" },
-    { id: 2, desc: "Logistics / Delivery", amount: 45000, date: "2023-11-22", category: "Shipping" },
-    { id: 3, desc: "Marketing Ads", amount: 120000, date: "2023-11-23", category: "Marketing" },
-    { id: 4, desc: "Store Utilities", amount: 35000, date: "2023-11-24", category: "Utilities" },
-  ],
-  topVendors: [
-    { id: 1, name: "Fragrance Suppliers Ltd", totalSpent: 850000, orders: 12, lastActive: "2 days ago" },
-    { id: 2, name: "PackPro Nigeria", totalSpent: 245000, orders: 8, lastActive: "1 week ago" },
-    { id: 3, name: "Swift Logistics", totalSpent: 120000, orders: 15, lastActive: "3 days ago" },
-    { id: 4, name: "Digital Ads Agency", totalSpent: 120000, orders: 4, lastActive: "Yesterday" },
-  ]
-};
-
-const RETAILERS_DATA = [
-  { 
-    id: 1, 
-    firstName: "Chioma", 
-    surname: "Okeke", 
-    otherNames: "Grace",
-    code: "RET-001", 
-    location: "Lekki Phase 1", 
-    state: "Lagos", 
-    phone: "+234 801 234 5678", 
-    email: "chioma.okeke@beautyplus.com", 
-    totalOrders: 45, 
-    totalSales: 450000, 
-    totalProfit: 120000, 
-    performance: "Excellent",
-    photo: "https://ui-avatars.com/api/?name=Chioma+Okeke&background=a63493&color=fff"
-  },
-  { 
-    id: 2, 
-    firstName: "Emmanuel", 
-    surname: "Adeyemi", 
-    otherNames: "",
-    code: "RET-002", 
-    location: "Wuse Zone 2", 
-    state: "Abuja", 
-    phone: "+234 802 987 6543", 
-    email: "emmanuel.a@scentworld.com", 
-    totalOrders: 28, 
-    totalSales: 320000, 
-    totalProfit: 85000, 
-    performance: "Average",
-    photo: "https://ui-avatars.com/api/?name=Emmanuel+Adeyemi&background=3c763d&color=fff"
-  },
-  { 
-    id: 3, 
-    firstName: "Aisha", 
-    surname: "Bello", 
-    otherNames: "Zainab",
-    code: "RET-003", 
-    location: "Kano City", 
-    state: "Kano", 
-    phone: "+234 803 555 1212", 
-    email: "aisha.b@luxestore.com", 
-    totalOrders: 12, 
-    totalSales: 150000, 
-    totalProfit: 40000, 
-    performance: "Good",
-    photo: "https://ui-avatars.com/api/?name=Aisha+Bello&background=f0ad4e&color=fff"
-  },
-];
-
-const EXPENDITURE_DATA = [
-  { id: 1, description: "Perfume Stock Purchase", amount: 850000, date: "2023-11-20", tag: "purchases", vendor: "Fragrance Suppliers Ltd" },
-  { id: 2, description: "Staff Salary - November", amount: 320000, date: "2023-11-22", tag: "payout", vendor: "Payroll" },
-  { id: 3, description: "Delivery to Retailers", amount: 45000, date: "2023-11-23", tag: "delivery", vendor: "Swift Logistics" },
-  { id: 4, description: "Packaging Materials", amount: 150000, date: "2023-11-20", tag: "packaging", vendor: "PackPro Nigeria" },
-  { id: 5, description: "Office Rent - November", amount: 200000, date: "2023-11-01", tag: "misc", vendor: "Property Manager" },
-  { id: 6, description: "Marketing Campaign", amount: 120000, date: "2023-11-15", tag: "misc", vendor: "Digital Ads Agency" },
-  { id: 7, description: "Atomizer Stock", amount: 180000, date: "2023-11-18", tag: "purchases", vendor: "Accessory Wholesale" },
-  { id: 8, description: "Freelance Designer", amount: 50000, date: "2023-11-19", tag: "payout", vendor: "Creative Studio" },
-  { id: 9, description: "Interstate Delivery", amount: 75000, date: "2023-11-21", tag: "delivery", vendor: "Express Couriers" },
-  { id: 10, description: "Gift Boxes & Wrapping", amount: 95000, date: "2023-11-17", tag: "packaging", vendor: "Luxury Packaging Co" },
-  { id: 11, description: "Utilities Bill", amount: 35000, date: "2023-11-10", tag: "misc", vendor: "PHCN" },
-  { id: 12, description: "Oil Perfume Restock", amount: 420000, date: "2023-11-12", tag: "purchases", vendor: "Premium Oils Import" },
-];
 
 
 // --- UTILS ---
@@ -152,17 +43,18 @@ const PublicNavbar = ({ onSwitch }) => {
     <nav className="navbar navbar-expand-lg navbar-light bg-white sticky-top border-bottom shadow-sm py-3">
       <div className="container">
         <div className="navbar-brand d-flex align-items-center">
-           {!imgError ? (
-            <img src="logo-purple.png" alt="BRNDSCENTS" style={{height: '40px'}} onError={() => setImgError(true)} />
+          {!imgError ? (
+            <img src="./src/assets/logo-purple.png" alt="BRNDSCENTS" style={{height: '40px'}} onError={() => setImgError(true)} />
           ) : (
-            <div className="h3 mb-0 font-weight-bold text-brand" style={{fontFamily: 'serif', letterSpacing: '2px'}}>BRNDSCENTS</div>
+            <div className="h3 mb-0 font-weight-bold text-brand">BRNDSCENTS</div>
           )}
         </div>
         <div className="d-none d-md-flex align-items-center gap-4">
-          <a href="#" className="text-decoration-none text-secondary text-uppercase small font-weight-bold hover-brand">Shop</a>
-          <a href="#" className="text-decoration-none text-secondary text-uppercase small font-weight-bold hover-brand">New Arrivals</a>
-          <button onClick={onSwitch} className="btn btn-brand btn-sm text-uppercase font-weight-bold px-3 rounded-pill">
-            Admin Dashboard
+          <a href="#" className="text-decoration-none text-secondary text-uppercase small"><i className='bi bi-shop me-1'></i>Shop</a>
+          <a href="#" className="text-decoration-none text-secondary text-uppercase small"><i className='bi bi-bag-plus me-1'></i>New Arrivals</a>
+          <button onClick={onSwitch} className="btn btn-brand btn-sm text-uppercase font-weight-bold px-3 py-2 rounded-2">
+            <span className='me-2'> Login</span>
+            <i class="bi bi-box-arrow-in-right"></i>
           </button>
         </div>
       </div>
@@ -171,17 +63,78 @@ const PublicNavbar = ({ onSwitch }) => {
 };
 
 const HeroSection = () => (
-  <div className="position-relative bg-light py-5 overflow-hidden">
-    <div className="container py-5">
+  <div
+    className="position-relative py-5 overflow-hidden"
+    style={{
+      backgroundImage: `url(${heroBg})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      height: '750px'
+    }}
+  >
+    <div className="position-absolute w-100 h-100" style={{background: '#850e9734', top: 0, left: 0}} />
+    <div className="container py-5" style={{position: 'relative', zIndex: 1}}>
       <div className="row align-items-center">
         <div className="col-md-6">
-          <h1 className="display-4 mb-4 text-brand" style={{fontFamily: 'serif'}}>Scent of <br/> <span className="text-dark">Distinction.</span></h1>
-          <p className="lead text-muted mb-5">Curated fragrances. Authentic. Timeless.</p>
+          <h1 className="display-4 mb-4 fw-bold text-white">Scent of <br/> <span className="text-light">Distinction.</span></h1>
+          <p className="lead text-light mb-5">Curated fragrances. Authentic. Timeless.</p>
           <button className="btn btn-brand btn-lg px-5 py-3 text-uppercase font-weight-bold shadow">Shop Now</button>
         </div>
       </div>
     </div>
   </div>
+);
+
+// --- PUBLIC FOOTER ---
+const Footer = () => (
+  <footer className="bg-body-tertiary border-top mt-5">
+    <div className="container py-5">
+      <div className="row">
+        <div className="col-md-4 mb-4">
+          <h5 className="fw-bold text-brand">BRNDSCENTS</h5>
+          <p className="text-muted small">Curated fragrances and home scents crafted for distinction. Shop authentic perfumes, oils and accessories.</p>
+        </div>
+        <div className="col-md-2 mb-4">
+          <h6 className="fw-bold small text-uppercase text-muted">Shop</h6>
+          <ul className="list-unstyled small">
+            <li className='py-1'><a href="#" className="text-decoration-none text-muted"><i class="bi bi-boxes me-2"></i>All Products</a></li>
+            <li className='py-1'><a href="#" className="text-decoration-none text-muted"><i class="bi bi-box-seam me-2"></i>New Arrivals</a></li>
+            <li className='py-1'><a href="#" className="text-decoration-none text-muted"><i class="bi bi-star me-2"></i>Best Sellers</a></li>
+          </ul>
+        </div>
+        <div className="col-md-2 mb-4">
+          <h6 className="fw-bold small text-uppercase text-muted">Customer</h6>
+          <ul className="list-unstyled small">
+            <li className='py-1'><a href="#" className="text-decoration-none text-muted"><i class="bi bi-truck me-2"></i>Delivery & Shipping</a></li>
+            <li className='py-1'><a href="#" className="text-decoration-none text-muted"><i class="bi bi-list-check me-2"></i>FAQs</a></li>
+            <li className='py-1'><a href="#" className="text-decoration-none text-muted"><i class="bi bi-arrow-clockwise me-2"></i>Return Policy</a></li>
+          </ul>
+        </div>
+        <div className="col-md-2 mb-4">
+          <h6 className="fw-bold small text-uppercase text-muted">Social</h6>
+          <ul className="list-unstyled small">
+            <li className='py-1'><a href="https://instagram.com/brndscents" target='_blank' className="text-decoration-none text-muted"><i class="bi bi-instagram me-2"></i>Instagram</a></li>
+            <li className='py-1'><a href="https://wa.me/+2348034671375" className="text-decoration-none text-muted"><i class="bi bi-whatsapp me-2"></i>WhatsApp</a></li>
+            <li className='py-1'><a href="https://x.com/brndscents" className="text-decoration-none text-muted"><i class="bi bi-twitter-x me-2"></i>Twitter</a></li>
+          </ul>
+        </div>
+        <div className="col-md-2 mb-4">
+          <h6 className="fw-bold small text-uppercase text-muted">Contact</h6>
+          <ul className="list-unstyled mb-4">
+            <li className="py-1"><a href='#' className="text-decoration-none small text-muted"><i class="bi bi-geo-alt me-2"></i>Abuja, FCT</a></li>
+            <li className="py-1"><a href='#' className="text-decoration-none small text-muted"><i class="bi bi-envelope me-2"></i>brndscents@gmail.com</a></li>
+            <li className="py-1"><a href='#' className="text-decoration-none small text-muted"><i class="bi bi-telephone me-2"></i>+234 803 467 1375</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div className="pt-4 border-top mt-4 d-flex justify-content-between align-items-center">
+        <div className="small text-muted">© {new Date().getFullYear()} BRNDSCENTS. All rights reserved.</div>
+        <div className="small text-muted">Built by <a href="https://coresystech.ng" target='_blank' className='text-muted'>CORE-TECH <i className='bi bi-link-45deg'></i></a></div>
+      </div>
+    </div>
+  </footer>
 );
 
 // 2. ADMIN COMPONENTS
@@ -491,25 +444,25 @@ const POSSystem = ({ products }) => {
               </div>
 
               <div className="mb-3">
-                 <label className="small text-muted text-uppercase font-weight-bold d-block mb-2">Document Type</label>
-                 <div className="btn-group w-100" role="group">
-                    <button 
-                      type="button"
-                      onClick={() => setDocType("Receipt")}
-                      className={`btn ${docType === 'Receipt' ? 'btn-outline-brand active' : 'btn-outline-secondary'}`}
-                      style={docType === 'Receipt' ? {borderColor: '#a63493', backgroundColor: '#f3e5f5', color: '#a63493'} : {}}
-                    >
-                      Receipt
-                    </button>
-                    <button 
-                      type="button"
-                      onClick={() => setDocType("Invoice")}
-                      className={`btn ${docType === 'Invoice' ? 'btn-outline-brand active' : 'btn-outline-secondary'}`}
-                      style={docType === 'Invoice' ? {borderColor: '#a63493', backgroundColor: '#f3e5f5', color: '#a63493'} : {}}
-                    >
-                      Invoice
-                    </button>
-                 </div>
+                <label className="small text-muted text-uppercase font-weight-bold d-block mb-2">Document Type</label>
+                <div className="btn-group w-100" role="group">
+                  <button 
+                    type="button"
+                    onClick={() => setDocType("Receipt")}
+                    className={`btn ${docType === 'Receipt' ? 'btn-outline-brand active' : 'btn-outline-secondary'}`}
+                    style={docType === 'Receipt' ? {borderColor: '#a63493', backgroundColor: '#f3e5f5', color: '#a63493'} : {}}
+                  >
+                    Receipt
+                  </button>
+                  <button 
+                    type="button"
+                    onClick={() => setDocType("Invoice")}
+                    className={`btn ${docType === 'Invoice' ? 'btn-outline-brand active' : 'btn-outline-secondary'}`}
+                    style={docType === 'Invoice' ? {borderColor: '#a63493', backgroundColor: '#f3e5f5', color: '#a63493'} : {}}
+                  >
+                    Invoice
+                  </button>
+                </div>
               </div>
             </div>
 
@@ -1388,24 +1341,32 @@ const App = () => {
       <PublicNavbar onSwitch={handleAdminAccess} />
       <HeroSection />
       {/* Product Grid Mockup */}
-      <div className="container py-5">
-         <h2 className="h2 font-serif text-brand mb-4">Featured Collection</h2>
-         <div className="row g-4">
-            {INITIAL_PRODUCTS.slice(0, 4).map(p => (
-                <div key={p.id} className="col-md-3">
-                    <div className="card border-0 h-100">
-                        <div className="bg-light mb-3 d-flex align-items-center justify-content-center text-muted" style={{aspectRatio: '3/4'}}>
-                             <span>IMG</span>
-                        </div>
-                        <div className="card-body p-0">
-                            <h5 className="card-title fw-bold mb-1">{p.name}</h5>
-                            <p className="card-text text-success font-monospace">{formatCurrency(p.price)}</p>
-                        </div>
-                    </div>
-                </div>
-            ))}
-         </div>
-      </div>
+      <section className="py-5">
+        <div className="container py-5">
+          <h2 className="h2 font-serif text-brand mb-4">Featured Collection</h2>
+          <div className="row g-4">
+              {INITIAL_PRODUCTS.slice(0, 8).map(p => (
+                  <div key={p.id} className="col-md-3">
+                      <div className="card border-0 h-100">
+                          <div className="bg-light mb-3 d-flex align-items-center justify-content-center text-muted" style={{aspectRatio: '3/4'}}>
+                            <img
+                              src={p.img_url || './src/assets/product-placeholder.jpg'}
+                              alt={p.name}
+                              className="img-fluid"
+                              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                            />
+                          </div>
+                          <div className="card-body p-0">
+                              <h5 className="card-title text-uppercase small text-muted mb-1">{p.name}</h5>
+                              <p className="card-text text-success text-small fw-bold">{formatCurrency(p.price)}</p>
+                          </div>
+                      </div>
+                  </div>
+              ))}
+          </div>
+        </div>
+      </section>
+      <Footer />
     </div>
   );
 };

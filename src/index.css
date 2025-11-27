@@ -46,3 +46,19 @@ body {
     width: 100% !important;
   }
 }
+
+/* Make links slightly bolder and underlined on hover/focus for better affordance */
+a, a:link, a:visited {
+  transition: font-weight 120ms ease, text-decoration 120ms ease, color 120ms ease;
+}
+
+a:hover, a:focus, footer i:hover, footer i:focus {
+  font-weight: 600;
+  /* text-decoration: underline !important; */
+  text-decoration-thickness: 1.05px;
+  color: var(--brand-primary) !important;
+  /* text-decoration-color: var(--brand-primary) !important; */
+  transition: transform 120ms ease, color 120ms ease, text-decoration-thickness 120ms ease, font-weight 120ms ease;
+  /* transform: translateY(-2px); */
+  will-change: transform, color;
+}
