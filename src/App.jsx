@@ -85,7 +85,7 @@ const PublicNavbar = ({ onSwitch }) => {
         </div>
 
         {/* Offcanvas mobile sidebar (simplified) */}
-        <div className="offcanvas offcanvas-start" tabIndex="-1" id="mobileSidebar" aria-labelledby="mobileSidebarLabel">
+        <div className="offcanvas offcanvas-start d-md-none" tabIndex="-1" id="mobileSidebar" aria-labelledby="mobileSidebarLabel">
           <div className="offcanvas-header">
             <h5 className="offcanvas-title" id="mobileSidebarLabel">Menu</h5>
             <button type="button" className="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
