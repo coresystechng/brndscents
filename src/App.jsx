@@ -72,6 +72,7 @@ const HeroSection = () => (
       backgroundRepeat: 'no-repeat',
       height: '750px'
     }}
+    data-aos="fade-up"
   >
     <div className="position-absolute w-100 h-100" style={{background: '#850e9734', top: 0, left: 0}} />
     <div className="container py-5" style={{position: 'relative', zIndex: 1}}>
@@ -88,7 +89,7 @@ const HeroSection = () => (
 
 // --- PUBLIC FOOTER ---
 const Footer = () => (
-  <footer className="bg-body-tertiary border-top mt-5">
+  <footer className="bg-body-tertiary border-top mt-5" data-aos="fade-up">
     <div className="container py-5">
       <div className="row">
         <div className="col-md-4 mb-4">
@@ -1345,8 +1346,8 @@ const App = () => {
         <div className="container py-5">
           <h2 className="h2 font-serif text-brand mb-4">Featured Collection</h2>
           <div className="row g-4">
-              {INITIAL_PRODUCTS.slice(0, 8).map(p => (
-                  <div key={p.id} className="col-md-3">
+                {INITIAL_PRODUCTS.slice(0, 8).map((p, idx) => (
+                  <div key={p.id} className="col-md-3" data-aos="fade-up" data-aos-delay={idx * 80}>
                       <div className="card border-0 h-100">
                           <div className="bg-light mb-3 d-flex align-items-center justify-content-center text-muted" style={{aspectRatio: '3/4'}}>
                             <img
