@@ -5,6 +5,7 @@ import {
   Package, 
   Users, 
   Truck, 
+  LogIn,
   DollarSign, 
   LogOut, 
   Printer, 
@@ -16,7 +17,8 @@ import {
   TrendingDown,
   AlertCircle,
   CreditCard,
-    Activity,
+  Gift,
+  Activity,
   ArrowUpRight,
   ArrowDownRight,
   Store,
@@ -50,11 +52,19 @@ const PublicNavbar = ({ onSwitch }) => {
           )}
         </div>
         <div className="d-none d-md-flex align-items-center gap-4">
-          <a href="#" className="text-decoration-none text-secondary text-uppercase small"><i className='bi bi-shop me-1'></i>Shop</a>
-          <a href="#" className="text-decoration-none text-secondary text-uppercase small"><i className='bi bi-bag-plus me-1'></i>New Arrivals</a>
-          <button onClick={onSwitch} className="btn btn-brand btn-sm text-uppercase font-weight-bold px-3 py-2 rounded-2">
+          <a  href="#" 
+              className="text-decoration-none text-secondary text-uppercase small d-flex align-items-center gap-2">
+              <Store size={18} strokeWidth={1.5}/>
+              <span>Shop</span>
+          </a>
+          <a  href="#"
+              className="text-decoration-none text-secondary text-uppercase small d-flex align-items-center gap-2">
+              <Gift size={18} strokeWidth={1.5} />
+              <span>New Arrivals</span>
+          </a>
+          <button onClick={onSwitch} className="btn btn-brand btn-sm text-uppercase font-weight-bold px-3 py-2 rounded-2 d-flex align-items-center gap-1">
             <span className='me-2'> Login</span>
-            <i class="bi bi-box-arrow-in-right"></i>
+            <LogIn size={18} />
           </button>
         </div>
       </div>
@@ -637,7 +647,7 @@ const ExpenditureManager = () => {
 
   const filteredExpenditures = EXPENDITURE_DATA.filter(exp => {
     const matchesSearch = exp.description.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                         exp.vendor.toLowerCase().includes(searchTerm.toLowerCase());
+                          exp.vendor.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesTag = selectedTag === "all" || exp.tag === selectedTag;
     return matchesSearch && matchesTag;
   });
@@ -1348,7 +1358,7 @@ const App = () => {
           <div className="row g-4">
                 {INITIAL_PRODUCTS.slice(0, 8).map((p, idx) => (
                   <div key={p.id} className="col-md-3" data-aos="fade-up" data-aos-delay={idx * 80}>
-                      <div className="card border-0 h-100">
+                      <div className="card border-0 h-100 featured-card rounded-3 shadow-sm">
                           <div className="bg-light mb-3 d-flex align-items-center justify-content-center text-muted" style={{aspectRatio: '3/4'}}>
                             <img
                               src={p.img_url || './src/assets/product-placeholder.jpg'}
@@ -1357,7 +1367,7 @@ const App = () => {
                               style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                             />
                           </div>
-                          <div className="card-body p-0">
+                          <div className="card-body p-3 pt-0">
                               <h5 className="card-title text-uppercase small text-muted mb-1">{p.name}</h5>
                               <p className="card-text text-success text-small fw-bold">{formatCurrency(p.price)}</p>
                           </div>
