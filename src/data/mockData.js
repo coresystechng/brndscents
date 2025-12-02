@@ -5,9 +5,10 @@ export const INITIAL_PRODUCTS = [
   { id: 2, name: "Atomisers 5ml", price: 1500, cost: 1300, stock: 12, category: "Accessory", status: "Low Stock", img_url: './src/assets/atomisers-5ml.jpg' },
   { id: 15, name: "Body Mist 250ml", price: 7000, cost: 6500, stock: 5, category: "Perfume", status: "Low Stock", img_url: './src/assets/bodymist-250ml.jpg'},
   { id: 3, name: "FA Oil Perfume 10ml", price: 2000, cost: 1750, stock: 30, category: "Oil", status: "In Stock", img_url: './src/assets/fa-10ml.jpg'},
+  { id: 14, name: "Bre Tres 100ml", price: 4000, cost: 3500, stock: 2, category: "Perfume", status: "Low Stock", img_url: './src/assets/BE-TRES-100ml.jpg'},
+  { id: 5, name: "FA Oil Perfume 24ml", price: 4500, cost: 4200, stock: 5, category: "Oil", status: "Low Stock", img_url: './src/assets/fa-24ml.jpg' },
   { id: 4, name: "Naseem 24ml", price: 4500, cost: 4200, stock: 11, category: "Perfume", status: "Low Stock" },
   { id: 1, name: "Touch 5ml", price: 1500, cost: 1300, stock: 78, category: "Mini", status: "In Stock" },
-  { id: 5, name: "FA Oil Perfume 24ml", price: 4500, cost: 4200, stock: 5, category: "Oil", status: "Low Stock" },
   { id: 7, name: "Pendora Scents 30ml", price: 4500, cost: 4000, stock: 1, category: "Perfume", status: "Low Stock" },
   { id: 8, name: "Novaa Suger 30ml", price: 5500, cost: 5000, stock: 15, category: "Perfume", status: "In Stock" },
   { id: 9, name: "Official Crystal 35ml", price: 5000, cost: 4500, stock: 17, category: "Perfume", status: "In Stock" },
@@ -15,7 +16,6 @@ export const INITIAL_PRODUCTS = [
   { id: 11, name: "Choco Musk 50ml", price: 6000, cost: 5500, stock: 2, category: "Gourmand", status: "Low Stock" },
   { id: 12, name: "Interesting She 50ml", price: 6000, cost: 5500, stock: 3, category: "Perfume", status: "Low Stock" },
   { id: 13, name: "Monogotas 100ml", price: 4000, cost: 3500, stock: 2, category: "Perfume", status: "Low Stock" },
-  { id: 14, name: "Bre Tres 100ml", price: 4000, cost: 3500, stock: 2, category: "Perfume", status: "Low Stock" },
 ];
 
 export const DASHBOARD_DATA = {
