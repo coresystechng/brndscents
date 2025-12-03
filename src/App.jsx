@@ -23,12 +23,16 @@ import {
   ArrowUpRight,
   ArrowDownRight,
   Store,
-  CircleEllipsis,
+  SquareArrowRight,
+  Undo2,
   MapPin,
   Menu,
   Wallet,
   ShoppingBagIcon,
-  ExternalLink
+  ExternalLink,
+  SquareUser,
+  RectangleEllipsis,
+  SquareArrowDownRight
 } from 'lucide-react';
 
 import { INITIAL_PRODUCTS, DASHBOARD_DATA, RETAILERS_DATA, EXPENDITURE_DATA } from './data/mockData';
@@ -918,8 +922,6 @@ const VendorsManager = () => {
   );
 };
 
-
-
 // --- MAIN ADMIN DASHBOARD ---
 const AdminDashboard = ({ onSwitch }) => {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -1295,42 +1297,42 @@ const Login = ({ onLogin, onCancel }) => {
             <div className="bg-brand text-white d-inline-flex align-items-center justify-content-center rounded-circle mb-3 shadow-sm" style={{width: '64px', height: '64px'}}>
               <Lock size={32} />
             </div>
-            <h3 className="font-serif font-weight-bold text-dark">Admin Access</h3>
-            <p className="text-muted small">Please sign in to continue</p>
+            <h3 className="font-serif font-weight-bold text-dark">Login to your account</h3>
+            <p className="text-muted small fw-light">Please sign in to continue</p>
           </div>
 
           {error && (
             <div className="alert alert-danger small py-2 d-flex align-items-center" role="alert">
-              <div className="me-2"><Trash2 size={14} /></div> {/* Using Trash2 as generic alert icon placeholder if AlertCircle not avail, but AlertCircle is imported in lucide-react usually. Wait, I didn't import AlertCircle in the last step explicitly but it might be there. I'll use Lock or just text if unsure. Actually AlertCircle was in the original file imports? Let me check. No, I see ShoppingBag... Download. I didn't see AlertCircle in the list I just edited. I'll use generic text or just no icon to be safe, or use Lock. */}
+              <div className="me-2"><Trash2 size={14} /></div>
               <div>{error}</div>
             </div>
           )}
 
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
-              <label className="form-label small text-muted text-uppercase font-weight-bold">Email Address</label>
+              <SquareUser size={16} strokeWidth={2} className='me-2 text-muted' />
+              <label className="small form-label text-muted text-uppercase font-weight-bold">Retailer ID</label>
               <input 
                 type="email" 
-                className="form-control form-control-lg bg-light border-0" 
-                placeholder="name@company.com"
+                className="form-control form-control-lg bg-light border-1" 
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
             </div>
             <div className="mb-4">
-              <label className="form-label small text-muted text-uppercase font-weight-bold d-flex justify-content-between">
+              <RectangleEllipsis size={16} strokeWidth={2} className='me-2 text-muted' />
+              <label className="form-label small text-muted text-uppercase font-weight-bold">
                 Password
-                <a href="#" className="text-decoration-none text-brand small">Forgot?</a>
               </label>
               <input 
                 type="password" 
-                className="form-control form-control-lg bg-light border-0" 
-                placeholder="••••••••"
+                className="form-control form-control-lg small bg-light border-1" 
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
               />
+                <a href="#" className="d-block mt-2 text-decoration-none text-end text-brand small">Forgot password?</a>
             </div>
             
             <button 
@@ -1338,7 +1340,8 @@ const Login = ({ onLogin, onCancel }) => {
               className="btn btn-brand w-100 py-3 font-weight-bold text-uppercase shadow-sm mb-3"
               disabled={loading}
             >
-              {loading ? 'Signing in...' : 'Sign In Dashboard'}
+              {loading ? 'Signing in...' : 'Proceed to Dashboard'}
+              <SquareArrowRight size={16} className='ms-2 mb-1' />
             </button>
             
             <button 
@@ -1346,12 +1349,10 @@ const Login = ({ onLogin, onCancel }) => {
               onClick={onCancel}
               className="btn btn-light w-100 py-3 font-weight-bold text-uppercase text-muted"
             >
+              <Undo2 size={16} className='me-2 mb-1' />
               Return to Store
             </button>
           </form>
-        </div>
-        <div className="card-footer bg-light py-3 text-center border-0">
-          <small className="text-muted">Protected System • BRNDSCENTS</small>
         </div>
       </div>
     </div>
