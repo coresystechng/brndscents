@@ -32,7 +32,8 @@ import {
   ExternalLink,
   SquareUser,
   RectangleEllipsis,
-  SquareArrowDownRight
+  SquareArrowDownRight,
+  ArrowRight
 } from 'lucide-react';
 
 import { INITIAL_PRODUCTS, DASHBOARD_DATA, RETAILERS_DATA, EXPENDITURE_DATA } from './data/mockData';
@@ -1423,6 +1424,74 @@ const App = () => {
                       </div>
                   </div>
               ))}
+          </div>
+        </div>
+      </section>
+      {/* Join Retailers Section */}
+      <section className="py-5 bg-dark text-light">
+        <div className="container py-5">
+          <div className="row align-items-center justify-content-between">
+            <div className="col-md-6 mb-4 mb-md-0" data-aos="fade-right" data-aos-duration="1000">
+              <img
+                src="./src/assets/students-duo.jpg"
+                alt="Retail Partnership"
+                className="img-fluid rounded-3 shadow-lg"
+              />
+            </div>
+            <div className="col-md-5 text-md-start text-center" data-aos="fade-left" data-aos-duration="1000">
+              <h2 className="display-4 fw-bold mb-3 font-serif text-brand">Join Our Retailer Network</h2>
+              <p className="lead mb-4 opacity-75">
+                Start a small side hustle or grow your business by partnering with us.
+                Access exclusive products, dedicated support, free shipping, and a thriving community of fellow entrepreneurs.
+              </p>
+              <button className="btn btn-lg btn-light text-dark shadow-sm d-inline-flex align-items-center">
+                Get Started
+                <ArrowRight size={18} className="ms-2" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+      {/* Testimonials Section */}
+      <section className="py-5 text-dark">
+        <div className="container py-5">
+          <div className="row justify-content-center text-center mb-5">
+            <div className="col-lg-8" data-aos="fade-up" data-aos-duration="1000">
+              <h2 className="display-4 fw-bold mb-3 font-serif text-brand">What Our Customers Say</h2>
+              <p className="lead opacity-75">
+                Hear from our satisfied customers about their experience with our exquisite perfumes.
+              </p>
+            </div>
+          </div>
+          <div className="row g-4">
+            {/* Placeholder for individual reviews */}
+            <div className="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100" data-aos-duration="1000">
+              <div className="card h-100 shadow-sm featured-card bg-light-subtle border-0">
+                <div className="card-body p-4">
+                  <p className="card-text fst-italic mb-3">"Absolutely love the scent! It's long-lasting and I always get compliments. A truly luxurious experience."</p>
+                  <h6 className="card-subtitle mb-0 fw-bold">- Jane Doe</h6>
+                  <small className="text-muted">Verified Buyer</small>
+                </div>
+              </div>
+            </div>
+            <div className="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000">
+              <div className="card h-100 shadow-sm featured-card bg-light-subtle  border-0">
+                <div className="card-body p-4">
+                  <p className="card-text fst-italic mb-3">"The packaging is beautiful, and the fragrance is even better. It's become my signature scent!"</p>
+                  <h6 className="card-subtitle mb-0 fw-bold">- John Smith</h6>
+                  <small className="text-muted">Verified Buyer</small>
+                </div>
+              </div>
+            </div>
+            <div className="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300" data-aos-duration="1000">
+              <div className="card h-100 shadow-sm featured-card bg-light-subtle  border-0">
+                <div className="card-body p-4">
+                  <p className="card-text fst-italic mb-3">"I was looking for something unique, and this perfume delivered. Highly recommend for anyone wanting to stand out."</p>
+                  <h6 className="card-subtitle mb-0 fw-bold">- Emily White</h6>
+                  <small className="text-muted">Verified Buyer</small>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
