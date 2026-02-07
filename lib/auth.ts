@@ -24,7 +24,7 @@ export async function getUserProfile(): Promise<UserProfile | null> {
   const supabase = await createClient()
   const user = await getUser()
 
-  if (!user) return null
+  if (!user || !user.email) return null
 
   // Check if admin
   if (user.email === process.env.ADMIN_EMAIL) {
