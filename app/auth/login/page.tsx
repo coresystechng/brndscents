@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -33,9 +34,9 @@ export default function LoginPage() {
       if (data.user) {
         // Check if admin
         if (email === process.env.NEXT_PUBLIC_ADMIN_EMAIL) {
-          router.push('/admin/dashboard')
+          router.push('/admin')
         } else {
-          router.push('/retailer/dashboard')
+          router.push('/retailer')
         }
         router.refresh()
       }
@@ -94,10 +95,13 @@ export default function LoginPage() {
             </Button>
           </form>
 
-          <div className="mt-4 text-center text-sm text-muted-foreground">
+          <div className="mt-4 space-y-2 text-center text-sm text-muted-foreground">
             <p>
-              {"Don't have an account? Contact your administrator"}
+              {"Don't have an account?"}
             </p>
+            <Link href="/admin/create-retailer" className="text-primary hover:underline font-medium">
+              Create a new retailer account
+            </Link>
           </div>
         </CardContent>
       </Card>
